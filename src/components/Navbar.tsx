@@ -24,7 +24,7 @@ export default function Navbar() {
 
           {/* Call to Action Button */}
           <div>
-            <Link href="/contact" className="bg-blue-900 text-white px-4 py-2 rounded-md font-semibold hover:bg-blue-800 transition">
+            <Link href="/book" className="bg-blue-900 text-white px-4 py-2 rounded-md font-semibold hover:bg-blue-800 transition">
               Book Consultation
             </Link>
           </div>
