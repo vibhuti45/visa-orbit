@@ -1,6 +1,19 @@
+# Visa Orbit
+
+## Custom Booking Flow
+The application now uses an internal scheduling form instead of a third‑party iframe. Visitors enter their contact details, choose a service, select a date/time, and when they submit an API route creates a Google Calendar event (with Meet link) and emails both the client and `visaorbitconsultancy@gmail.com`.
+
+Configure credentials via `.env.local` (see section below).
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+
+
 ## Getting Started
+
+### Environment variables
+```
+> **Note:** If you see the "Missing GOOGLE_CALENDAR_ID" error when booking, set the `GOOGLE_CALENDAR_ID` variable or allow the code to fall back to `primary`.
 
 First, run the development server:
 
