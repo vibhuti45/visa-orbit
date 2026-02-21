@@ -217,7 +217,7 @@ export default function Home() {
           <h2 className="text-3xl font-bold font-serif mb-16">Join the Community</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="p-6">
-              <div className="text-4xl md:text-5xl font-extrabold text-blue-300 mb-2">150+</div>
+              <div className="text-4xl md:text-5xl font-extrabold text-blue-300 mb-2">50+</div>
               <div className="text-blue-100 font-medium">Visas Approved</div>
             </div>
             <div className="p-6">
@@ -225,7 +225,7 @@ export default function Home() {
               <div className="text-blue-100 font-medium">Success Rate</div>
             </div>
             <div className="p-6">
-              <div className="text-4xl md:text-5xl font-extrabold text-blue-300 mb-2">12</div>
+              <div className="text-4xl md:text-5xl font-extrabold text-blue-300 mb-2">5+</div>
               <div className="text-blue-100 font-medium">Partner Companies</div>
             </div>
             <div className="p-6">

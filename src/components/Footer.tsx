@@ -29,6 +29,7 @@ export default function Footer() {
               <li><Link href="/about" className="hover:text-white transition">About Us</Link></li>
               <li><Link href="/services" className="hover:text-white transition">Services</Link></li>
               <li><Link href="/contact" className="hover:text-white transition">Contact</Link></li>
+              <li><Link href="/careers" className="hover:text-white transition">Careers</Link></li>
             </ul>
           </div>
 
@@ -49,11 +50,11 @@ export default function Footer() {
             <ul className="space-y-4 text-blue-200 text-sm">
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0 text-blue-400" />
-                <span>123 Business Park,<br/>London, UK</span>
+                <span>10 Downing Street,<br/>London, UK</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-blue-400" />
-                <span>+44 7000 000000</span>
+                <span>+44 7577 011 891</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-blue-400" />
@@ -73,6 +74,9 @@ export default function Footer() {
             </Link>
             <Link href="/terms" className="hover:text-white transition underline-offset-4 hover:underline">
               Terms & Conditions
+            </Link>
+            <Link href="/refund" className="hover:text-white transition underline-offset-4 hover:underline">
+              Refund Policy
             </Link>
           </div>
         </div>
