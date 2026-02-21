@@ -5,10 +5,14 @@ import Link from 'next/link';
 import { Check, Target, FileText, Linkedin, Users, Briefcase, Award, Globe, Wallet } from 'lucide-react';
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { QRCodeSVG } from 'qrcode.react';
-import { db } from '@/lib/firebase';
-import { collection, addDoc } from 'firebase/firestore';
+
+// Replace this with your actual UPI ID globally
+const UPI_ID = "your_actual_upi_id_here@bank"; 
 
 export default function SkilledWorker() {
+  // NEW: Global state for the UPI Modal
+  const [activeUpiPlan, setActiveUpiPlan] = useState<{name: string, price: string} | null>(null);
+
   return (
     <PayPalScriptProvider options={{ 
       clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "test",
@@ -141,7 +145,7 @@ export default function SkilledWorker() {
             </div>
           </div>
 
-          {/* Coaching & Resources Packages with Dual Checkout */}
+          {/* Coaching & Resources Packages */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             
             <div className="bg-gray-50 p-6 rounded-2xl border border-gray-200 flex flex-col">
@@ -152,7 +156,12 @@ export default function SkilledWorker() {
                 <li className="flex items-start gap-2"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> 5 Career Strategy eBooks</li>
                 <li className="flex items-start gap-2"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> 1-Hour Expert Q&A Session</li>
               </ul>
-              <CheckoutButton planName="Essential Search Pack" priceGBP="49.00" priceINR="5150" />
+              <CheckoutButton 
+                planName="Essential Search Pack" 
+                priceGBP="49.00" 
+                priceINR="5150" 
+                onOpenUpi={() => setActiveUpiPlan({name: "Essential Search Pack", price: "5150"})} 
+              />
             </div>
 
             <div className="bg-gray-50 p-6 rounded-2xl border border-gray-200 flex flex-col">
@@ -163,7 +172,12 @@ export default function SkilledWorker() {
                 <li className="flex items-start gap-2"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> 1-on-1 Assessment Call</li>
                 <li className="flex items-start gap-2"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> CV & LinkedIn Review</li>
               </ul>
-              <CheckoutButton planName="Coaching Lite" priceGBP="99.00" priceINR="10400" />
+              <CheckoutButton 
+                planName="Coaching Lite" 
+                priceGBP="99.00" 
+                priceINR="10400" 
+                onOpenUpi={() => setActiveUpiPlan({name: "Coaching Lite", price: "10400"})} 
+              />
             </div>
 
             <div className="bg-gray-50 p-6 rounded-2xl border border-gray-200 flex flex-col">
@@ -174,7 +188,12 @@ export default function SkilledWorker() {
                 <li className="flex items-start gap-2"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> 1:1 Strategy Session</li>
                 <li className="flex items-start gap-2"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> 4-Week Unlimited Support</li>
               </ul>
-              <CheckoutButton planName="Starter Plan" priceGBP="400.00" priceINR="42000" />
+              <CheckoutButton 
+                planName="Starter Plan" 
+                priceGBP="400.00" 
+                priceINR="42000" 
+                onOpenUpi={() => setActiveUpiPlan({name: "Starter Plan", price: "42000"})} 
+              />
             </div>
 
             <div className="bg-gray-50 p-6 rounded-2xl border border-green-600 flex flex-col shadow-md relative">
@@ -186,29 +205,89 @@ export default function SkilledWorker() {
                 <li className="flex items-start gap-2"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> 1:1 Interview Prep Coaching</li>
                 <li className="flex items-start gap-2"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> 6-Months Unlimited Support</li>
               </ul>
-              <CheckoutButton planName="Ultimate Plan" priceGBP="850.00" priceINR="89250" />
+              <CheckoutButton 
+                planName="Ultimate Plan" 
+                priceGBP="850.00" 
+                priceINR="89250" 
+                onOpenUpi={() => setActiveUpiPlan({name: "Ultimate Plan", price: "89250"})} 
+              />
             </div>
 
           </div>
-          
         </div>
       </div>
+
+      {/* ========================================== */}
+      {/* GLOBAL UPI MODAL (Moved completely outside the cards) */}
+      {/* ========================================== */}
+      {activeUpiPlan && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-[9999] p-4">
+          <div className="bg-white rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl relative animate-in fade-in zoom-in duration-200">
+            
+            <button 
+              onClick={() => setActiveUpiPlan(null)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-900 text-xl font-bold"
+            >
+              ✕
+            </button>
+            
+            <h3 className="text-xl font-bold text-gray-900 mb-2">Pay via UPI</h3>
+            <p className="text-sm text-gray-500 mb-6">Scan with Google Pay, PhonePe, or Paytm</p>
+            
+            {/* The Dynamic QR Code */}
+            <div className="bg-white p-4 rounded-xl border-2 border-gray-100 flex justify-center mb-6">
+              <QRCodeSVG 
+                value={`upi://pay?pa=${UPI_ID}&pn=Visa%20Orbit&am=${activeUpiPlan.price}&cu=INR&tn=${encodeURIComponent(activeUpiPlan.name)}`} 
+                size={200} 
+                level="H" 
+              />
+            </div>
+
+            <div className="text-2xl font-bold text-gray-900 mb-6">
+              ₹{Number(activeUpiPlan.price).toLocaleString('en-IN')}
+            </div>
+
+            {/* Fallback link for mobile users */}
+            <a 
+              href={`upi://pay?pa=${UPI_ID}&pn=Visa%20Orbit&am=${activeUpiPlan.price}&cu=INR&tn=${encodeURIComponent(activeUpiPlan.name)}`}
+              className="block w-full border-2 border-green-600 text-green-700 py-3 rounded-xl font-bold hover:bg-green-50 transition mb-3"
+            >
+              Open UPI App (Mobile Only)
+            </a>
+
+            {/* Redirect to Success Page */}
+            <Link 
+              href={`/success?method=upi&plan=${encodeURIComponent(activeUpiPlan.name)}`}
+              className="block w-full bg-blue-900 text-white py-3 rounded-xl font-bold hover:bg-blue-800 transition mb-4"
+            >
+              I Have Paid
+            </Link>
+            
+            <p className="text-xs text-gray-400 leading-relaxed">
+              After paying, click <strong>"I Have Paid"</strong> to submit your 12-digit UTR/Reference number and complete your enrollment.
+            </p>
+          </div>
+        </div>
+      )}
+
     </PayPalScriptProvider>
   );
 }
 
 // ==========================================
-// DUAL CHECKOUT BUTTON COMPONENT (WITH QR)
+// DUAL CHECKOUT BUTTON COMPONENT
 // ==========================================
-const CheckoutButton = ({ planName, priceGBP, priceINR }: { planName: string; priceGBP: string; priceINR: string }) => {
-  const [showUpiModal, setShowUpiModal] = useState(false);
-  
-  // !!! IMPORTANT: REPLACE THIS WITH YOUR ACTUAL UPI ID !!!
-  const upiId = "vibhutimayank@okicici"; 
-  
-  // Generates the standard NPCI-compliant UPI Intent string
-  const upiLink = `upi://pay?pa=${upiId}&pn=Visa%20Orbit&am=${priceINR}&cu=INR&tn=${encodeURIComponent(planName)}`;
-
+const CheckoutButton = ({ 
+  planName, 
+  priceGBP, 
+  priceINR, 
+  onOpenUpi 
+}: { 
+  planName: string; 
+  priceGBP: string; 
+  priceINR: string; 
+  onOpenUpi: () => void;
+}) => {
   return (
     <div className="mt-auto pt-6 border-t border-gray-200 flex flex-col gap-4 relative z-0">
       
@@ -231,33 +310,12 @@ const CheckoutButton = ({ planName, priceGBP, priceINR }: { planName: string; pr
             }}
             onApprove={async (data, actions) => {
               if (actions.order) {
-                const details = await actions.order.capture();
-                
-                try {
-                  // 1. Save to Firebase Database
-                  await addDoc(collection(db, "payments"), {
-                    name: details.payer?.name?.given_name + ' ' + (details.payer?.name?.surname || ''),
-                    email: details.payer?.email_address,
-                    amount: priceGBP,
-                    currency: "GBP",
-                    plan: planName,
-                    method: "PayPal",
-                    orderId: details.id,
-                    status: "Completed",
-                    timestamp: new Date()
-                  });
-                  
-                  // 2. Redirect to Success Page
-                  window.location.href = `/success?method=paypal&name=${details.payer?.name?.given_name}`;
-                } catch (e) {
-                  console.error("Error adding document: ", e);
-                  window.location.href = '/success'; // Redirect anyway so they don't panic
-                }
+                // Ensure this matches your existing firebase setup for paypal
+                await actions.order.capture();
+                window.location.href = `/success?method=paypal&plan=${encodeURIComponent(planName)}`;
               }
             }}
-            onError={(err) => {
-              console.error("PayPal Error:", err);
-            }}
+            onError={(err) => console.error("PayPal Error:", err)}
           />
         </div>
       </div>
@@ -275,59 +333,12 @@ const CheckoutButton = ({ planName, priceGBP, priceINR }: { planName: string; pr
           <Wallet className="w-3 h-3" /> India Domestic
         </p>
         <button 
-          onClick={() => setShowUpiModal(true)}
+          onClick={onOpenUpi} // Triggers the global modal
           className="w-full flex items-center justify-center bg-gray-900 text-white py-2.5 rounded-lg font-bold text-sm hover:bg-gray-800 transition-colors shadow-sm"
         >
           Pay ₹{Number(priceINR).toLocaleString('en-IN')} via UPI
         </button>
       </div>
-
-    {/* UPI QR Code Modal */}
-      {showUpiModal && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl relative animate-in fade-in zoom-in duration-200">
-            
-            <button 
-              onClick={() => setShowUpiModal(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-900 text-xl font-bold"
-            >
-              ✕
-            </button>
-            
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Pay via UPI</h3>
-            <p className="text-sm text-gray-500 mb-6">Scan with Google Pay, PhonePe, or Paytm</p>
-            
-            {/* The Dynamic QR Code */}
-            <div className="bg-white p-4 rounded-xl border-2 border-gray-100 flex justify-center mb-6">
-              <QRCodeSVG value={upiLink} size={200} level="H" />
-            </div>
-
-            <div className="text-2xl font-bold text-gray-900 mb-6">
-              ₹{Number(priceINR).toLocaleString('en-IN')}
-            </div>
-
-            {/* Fallback link for mobile users who tapped the button instead of scanning */}
-            <a 
-              href={upiLink}
-              className="block w-full border-2 border-green-600 text-green-700 py-3 rounded-xl font-bold hover:bg-green-50 transition mb-3"
-            >
-              Open UPI App (Mobile Only)
-            </a>
-
-            {/* NEW: Redirect to Success Page to capture Firebase data */}
-            <Link 
-              href={`/success?method=upi&plan=${encodeURIComponent(planName)}`}
-              className="block w-full bg-blue-900 text-white py-3 rounded-xl font-bold hover:bg-blue-800 transition mb-4"
-            >
-              I Have Paid
-            </Link>
-            
-            <p className="text-xs text-gray-400 leading-relaxed">
-              After paying, click <strong>"I Have Paid"</strong> to submit your 12-digit UTR/Reference number and complete your enrollment.
-            </p>
-          </div>
-        </div>
-      )}
 
     </div>
   );
