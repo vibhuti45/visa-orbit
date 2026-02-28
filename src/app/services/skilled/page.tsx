@@ -7,7 +7,7 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { QRCodeSVG } from 'qrcode.react';
 
 // Replace this with your actual UPI ID globally
-const UPI_ID = "your_actual_upi_id_here@bank"; 
+const UPI_ID = "7324962717@axisbank"; 
 
 export default function SkilledWorker() {
   // NEW: Global state for the UPI Modal
@@ -173,8 +173,8 @@ export default function SkilledWorker() {
                 <li className="flex items-start gap-2"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> CV & LinkedIn Review</li>
               </ul>
                 <Link 
-                  href="/checkout?plan=Essential+Search+Pack&priceGBP=49.00&priceINR=5150"
-                  className="mt-auto block w-full text-center bg-green-600 text-white py-3 rounded-xl font-bold hover:bg-green-700 transition shadow-sm"
+                  href="/checkout?plan=Coaching+Lite&priceGBP=99.00&priceINR=10400"
+                  className="mt-auto block w-full text-center border-2 border-green-600 text-green-700 py-3 rounded-xl font-bold hover:bg-green-50 transition shadow-sm"
                 >
                   Buy Now
                 </Link>
@@ -188,12 +188,12 @@ export default function SkilledWorker() {
                 <li className="flex items-start gap-2"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> 1:1 Strategy Session</li>
                 <li className="flex items-start gap-2"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> 4-Week Unlimited Support</li>
               </ul>
-                <Link 
-                  href="/checkout?plan=Essential+Search+Pack&priceGBP=49.00&priceINR=5150"
-                  className="mt-auto block w-full text-center bg-green-600 text-white py-3 rounded-xl font-bold hover:bg-green-700 transition shadow-sm"
-                >
-                  Buy Now
-                </Link>
+              <Link 
+                href="/checkout?plan=Starter+Plan&priceGBP=400.00&priceINR=42000"
+                className="mt-auto block w-full text-center border-2 border-green-600 text-green-700 py-3 rounded-xl font-bold hover:bg-green-50 transition shadow-sm"
+              >
+                Buy Now
+              </Link>
             </div>
 
             <div className="bg-gray-50 p-6 rounded-2xl border border-green-600 flex flex-col shadow-md relative">
@@ -206,7 +206,7 @@ export default function SkilledWorker() {
                 <li className="flex items-start gap-2"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> 6-Months Unlimited Support</li>
               </ul>
                 <Link 
-                  href="/checkout?plan=Essential+Search+Pack&priceGBP=49.00&priceINR=5150"
+                  href="/checkout?plan=Ultimate+Plan&priceGBP=850.00&priceINR=89250"
                   className="mt-auto block w-full text-center bg-green-600 text-white py-3 rounded-xl font-bold hover:bg-green-700 transition shadow-sm"
                 >
                   Buy Now
