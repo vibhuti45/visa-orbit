@@ -156,12 +156,12 @@ export default function SkilledWorker() {
                 <li className="flex items-start gap-2"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> 5 Career Strategy eBooks</li>
                 <li className="flex items-start gap-2"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> 1-Hour Expert Q&A Session</li>
               </ul>
-              <CheckoutButton 
-                planName="Essential Search Pack" 
-                priceGBP="49.00" 
-                priceINR="5150" 
-                onOpenUpi={() => setActiveUpiPlan({name: "Essential Search Pack", price: "5150"})} 
-              />
+                <Link 
+                  href="/checkout?plan=Essential+Search+Pack&priceGBP=49.00&priceINR=5150"
+                  className="mt-auto block w-full text-center bg-green-600 text-white py-3 rounded-xl font-bold hover:bg-green-700 transition shadow-sm"
+                >
+                  Buy Now
+                </Link>
             </div>
 
             <div className="bg-gray-50 p-6 rounded-2xl border border-gray-200 flex flex-col">
@@ -172,12 +172,12 @@ export default function SkilledWorker() {
                 <li className="flex items-start gap-2"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> 1-on-1 Assessment Call</li>
                 <li className="flex items-start gap-2"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> CV & LinkedIn Review</li>
               </ul>
-              <CheckoutButton 
-                planName="Coaching Lite" 
-                priceGBP="99.00" 
-                priceINR="10400" 
-                onOpenUpi={() => setActiveUpiPlan({name: "Coaching Lite", price: "10400"})} 
-              />
+                <Link 
+                  href="/checkout?plan=Essential+Search+Pack&priceGBP=49.00&priceINR=5150"
+                  className="mt-auto block w-full text-center bg-green-600 text-white py-3 rounded-xl font-bold hover:bg-green-700 transition shadow-sm"
+                >
+                  Buy Now
+                </Link>
             </div>
 
             <div className="bg-gray-50 p-6 rounded-2xl border border-gray-200 flex flex-col">
@@ -188,12 +188,12 @@ export default function SkilledWorker() {
                 <li className="flex items-start gap-2"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> 1:1 Strategy Session</li>
                 <li className="flex items-start gap-2"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> 4-Week Unlimited Support</li>
               </ul>
-              <CheckoutButton 
-                planName="Starter Plan" 
-                priceGBP="400.00" 
-                priceINR="42000" 
-                onOpenUpi={() => setActiveUpiPlan({name: "Starter Plan", price: "42000"})} 
-              />
+                <Link 
+                  href="/checkout?plan=Essential+Search+Pack&priceGBP=49.00&priceINR=5150"
+                  className="mt-auto block w-full text-center bg-green-600 text-white py-3 rounded-xl font-bold hover:bg-green-700 transition shadow-sm"
+                >
+                  Buy Now
+                </Link>
             </div>
 
             <div className="bg-gray-50 p-6 rounded-2xl border border-green-600 flex flex-col shadow-md relative">
@@ -205,12 +205,12 @@ export default function SkilledWorker() {
                 <li className="flex items-start gap-2"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> 1:1 Interview Prep Coaching</li>
                 <li className="flex items-start gap-2"><Check className="w-4 h-4 text-green-500 mt-0.5 shrink-0" /> 6-Months Unlimited Support</li>
               </ul>
-              <CheckoutButton 
-                planName="Ultimate Plan" 
-                priceGBP="850.00" 
-                priceINR="89250" 
-                onOpenUpi={() => setActiveUpiPlan({name: "Ultimate Plan", price: "89250"})} 
-              />
+                <Link 
+                  href="/checkout?plan=Essential+Search+Pack&priceGBP=49.00&priceINR=5150"
+                  className="mt-auto block w-full text-center bg-green-600 text-white py-3 rounded-xl font-bold hover:bg-green-700 transition shadow-sm"
+                >
+                  Buy Now
+                </Link>
             </div>
 
           </div>
